@@ -14,7 +14,8 @@ if (-not (isNetCoreInstalled)) {
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# install minikube 
+# install minikube
+choco install minikube -y
 choco install kubernetes-cli -y
 
 # install docker
@@ -23,6 +24,12 @@ choco install kubernetes-cli -y
 # install heml
 choco install kubernetes-helm -y
 
+# create a hyper-v virtual network switch with name "Primary Virtual Switch" folling this link
+# https://medium.com/@JockDaRock/minikube-on-windows-10-with-hyper-v-6ef0f4dc158c
+
+$env:MINIKUBE_HOME = "E:/"
+minikube start --vm-driver hyperv --hyperv-virtual-switch "Primary Virtual Switch"
+
 # create mvc app 
 Invoke-Expression "dotnet new mvc --name build2018" 
 
@@ -30,3 +37,10 @@ Invoke-Expression "dotnet new mvc --name build2018"
 Set-Location ".\build2018"
 Invoke-Expression "..\util\draft\draft init"
 Invoke-Expression "..\util\draft\draft create"
+
+<# 
+    if 8080 connection refused, run 
+    kubectl -n kube-system delete deploy tiller-deploy
+    helm init --service-account default
+#>
+Invoke-Expression "helm init --service-account default"
