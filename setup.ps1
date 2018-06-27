@@ -10,9 +10,23 @@ if (-not (isNetCoreInstalled)) {
     Remove-Item $tempFile -Force 
 }
 
+# install chocolatey 
+Set-ExecutionPolicy Bypass -Scope Process -Force; 
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+# install minikube 
+choco install kubernetes-cli -y
+
+# install docker
+# follow .\modules\docker.psm1 and run step-by-step
+
+# install heml
+choco install kubernetes-helm -y
+
 # create mvc app 
 Invoke-Expression "dotnet new mvc --name build2018" 
 
 # draft 
 Set-Location ".\build2018"
+Invoke-Expression "..\util\draft\draft init"
 Invoke-Expression "..\util\draft\draft create"
