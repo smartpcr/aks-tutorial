@@ -6,6 +6,7 @@ brew update
 # 2. docker
 # 3. python3
 # 4. nodejs
+# 5. dotnet sdk
 
 echo "installing azure cli"
 brew install azure-cli
@@ -24,6 +25,7 @@ echo "verifying..."
 docker --version 
 docker-compose --version 
 docker-machine --version 
+vboxManage --version
 minikube version 
 kubectl version --client 
 
@@ -31,6 +33,9 @@ echo "starting minikue..."
 minikube start 
 kubectl cluster-info 
 kubectl get nodes 
+kubectl get pods
+kubectl get deployments
+kubectl get services
 
 echo "installing helm"
 brew install kubernetes-helm
