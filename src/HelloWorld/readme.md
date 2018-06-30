@@ -24,8 +24,3 @@ docker ps
 docker stop kubia-container
 docker rm kubia-container
 
-echo "cleanup"
-docker stop kubia-container
-docker rm kubia-container
-docker rmi kubia
-```
