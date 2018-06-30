@@ -62,7 +62,7 @@ kubectl get pods
 kubectl exec busybox cat /etc/resolv.conf
 # ingress
 minikube addons enable ingress
-kubectl create -f ./src/configs/ingress.yaml 
+kubectl create -f ./src/configs/ingress.yaml
 
 echo "installing helm"
 brew install kubernetes-helm
