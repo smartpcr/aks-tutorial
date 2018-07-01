@@ -8,6 +8,9 @@ brew update
 # 4. nodejs
 # 5. dotnet sdk
 
+brew install bash-completion
+source ~/.bash_profile
+
 echo "installing azure cli"
 brew install azure-cli
 az -v  
