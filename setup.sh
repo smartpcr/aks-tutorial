@@ -9,7 +9,8 @@ brew update
 # 5. dotnet sdk
 
 echo "install git credential manager"
-# java 9 or higher won't work
+# java 9 or higher won't work, if credential manager was already installed with new version of java, it need to be 
+# uninstalled first!!
 brew cask install caskroom/versions/java8
 brew install git-credential-manager
 git-credential-manager install
