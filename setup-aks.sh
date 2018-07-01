@@ -14,6 +14,8 @@ az aks create \
     --node-count 3 \
     --node-vm-size Standard_DS1
 
+az aks list -o table
+
 # if see error No module named '_cffi_backend'
 # run `brew link --overwrite python3`
 
@@ -33,3 +35,15 @@ az aks scale -n xdK8SCluster -g xdK8S -c 2
 
 # upgrades
 az aks upgrade -n xdK8SCluster -g xdK8S -k 1.9.6
+
+# switch to different cluster
+k config use-context minikube
+
+# use helm/chart (tiller service deployed to kube-system namespace)
+kubectl create -f ./helm-rbac.yaml 
+helm init --service-account tiller
+helm search
+helm repo update
+helm install stable/mysql
+helm list 
+helm delete ugly-billygoat
