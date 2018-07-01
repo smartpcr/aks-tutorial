@@ -8,6 +8,12 @@ brew update
 # 4. nodejs
 # 5. dotnet sdk
 
+echo "install git credential manager"
+# java 9 or higher won't work
+brew cask install caskroom/versions/java8
+brew install git-credential-manager
+git-credential-manager install
+
 echo "installing azure cli"
 brew install azure-cli
 az -v  
