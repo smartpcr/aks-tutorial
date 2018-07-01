@@ -2,7 +2,7 @@
 brew update 
 
 # manually install the following
-# 1. jdk
+# 1. jdk (do not use v9 or higher if you use git credential manager)
 # 2. docker
 # 3. python3
 # 4. nodejs
