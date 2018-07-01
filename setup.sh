@@ -2,14 +2,18 @@
 brew update 
 
 # manually install the following
-# 1. jdk
+# 1. jdk (do not use v9 or higher if you use git credential manager)
 # 2. docker
 # 3. python3
 # 4. nodejs
 # 5. dotnet sdk
 
-brew install bash-completion
-source ~/.bash_profile
+echo "install git credential manager"
+# java 9 or higher won't work, if credential manager was already installed with new version of java, it need to be 
+# uninstalled first!!
+brew cask install caskroom/versions/java8
+brew install git-credential-manager
+git-credential-manager install
 
 echo "installing azure cli"
 brew install azure-cli
