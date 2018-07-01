@@ -26,3 +26,7 @@ run the following
 ```bash
 manually install [python 3.7](https://www.python.org/downloads/)
 ```
+
+## GCP vs. Azure
+1. GCP is cheaper, faster (a few min), but UI/tooling lag behind
+2. AKS is super slow to create/scale (10-30 min)
