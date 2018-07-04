@@ -10,9 +10,23 @@ if (-not (isNetCoreInstalled)) {
     Remove-Item $tempFile -Force 
 }
 
+if (-not (isAzureCliInstalled)) {
+    $azureCliDownloadLink = "https://aka.ms/installazurecliwindows"
+    $tempFile = "C:\users\$env:username\downloads\dotnetsdk.exe"
+    $webClient = New-Object System.Net.WebClient
+    $webClient.DownloadFile($azureCliDownloadLink, $tempFile)
+    Start-Process $tempFile -Wait 
+    Remove-Item $tempFile -Force 
+}
+
 # install chocolatey 
-Set-ExecutionPolicy Bypass -Scope Process -Force; 
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+$isChocolateyInstalled = Invoke-Expression "choco -v"
+if (!$isChocolateyInstalled) {
+    Set-ExecutionPolicy Bypass -Scope Process -Force; 
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+}
+
+choco install azure-cli -y
 
 # install minikube
 choco install minikube -y
