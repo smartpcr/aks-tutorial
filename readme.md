@@ -1,13 +1,21 @@
-# Introduction 
+# Introduction
 
 This is following Build 2018 session on [Kubenetes Best Practice](https://channel9.msdn.com/events/Build/2018/BRK3701?term=kubernetes&lang-en=true)
+
+# Pre-requirement
+
+1. Install Azure PowerShell [Link](https://docs.microsoft.com/en-us/powershell/azure/install-azurerm-ps)
+2. Install Azure CLI [Link](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+3. Install Helm [Link](https://github.com/kubernetes/helm)
+4. Install Kubectl [Link](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)
+5. Login to Azure successfully
 
 ## setup windows environment
 ``` ps
 .\setup.ps1
 ```
 
-## setup mac environment 
+## setup mac environment
 ``` bash
 ./setup.sh
 ```
