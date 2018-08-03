@@ -1,6 +1,6 @@
 function isNetCoreInstalled () {
     try {
-        $dotnetCmd = Get-Command dotnet 
+        $dotnetCmd = Get-Command dotnet -ErrorAction SilentlyContinue
         $isInstalled = $false
         if ($dotnetCmd) {
             $isInstalled = Test-Path($dotnetCmd.Source)
@@ -14,10 +14,19 @@ function isNetCoreInstalled () {
 
 function isAzureCliInstalled() {
     try {
-        $azCmd = Get-Command az 
+        $azCmd = Get-Command az -ErrorAction SilentlyContinue
         if ($azCmd) {
             return Test-Path $azCmd.Source 
         }
+    }
+    catch {}
+    return $false 
+}
+
+function isChocoInstalled() {
+    try {
+        $chocoVersion = Invoke-Expression "choco -v" -ErrorAction SilentlyContinue
+        return $chocoVersion -ne $null 
     }
     catch {}
     return $false 

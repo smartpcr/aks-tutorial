@@ -1,6 +1,13 @@
-Import-Module .\Modules\common.psm1
+Import-Module .\Modules\common.psm1 -Force
+
+# install chocolatey 
+if (-not (isChocoInstalled)) {
+    Set-ExecutionPolicy Bypass -Scope Process -Force; 
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+}
 
 # install .net core
+$ErrorAc
 if (-not (isNetCoreInstalled)) {
     $netSdkDownloadLink = "https://download.microsoft.com/download/D/0/4/D04C5489-278D-4C11-9BD3-6128472A7626/dotnet-sdk-2.1.301-win-gs-x64.exe"
     $tempFile = "C:\users\$env:username\downloads\dotnetsdk.exe"
@@ -12,21 +19,16 @@ if (-not (isNetCoreInstalled)) {
 
 if (-not (isAzureCliInstalled)) {
     $azureCliDownloadLink = "https://aka.ms/installazurecliwindows"
-    $tempFile = "C:\users\$env:username\downloads\dotnetsdk.exe"
+    $tempFile = "C:\users\$env:username\downloads\azcli.msi"
     $webClient = New-Object System.Net.WebClient
     $webClient.DownloadFile($azureCliDownloadLink, $tempFile)
     Start-Process $tempFile -Wait 
     Remove-Item $tempFile -Force 
-}
 
-# install chocolatey 
-$isChocolateyInstalled = Invoke-Expression "choco -v"
-if (!$isChocolateyInstalled) {
-    Set-ExecutionPolicy Bypass -Scope Process -Force; 
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    <# or use choco to install 
+    choco install azure-cli -y
+    #>
 }
-
-choco install azure-cli -y
 
 # install minikube
 choco install minikube -y
