@@ -26,8 +26,23 @@ function isAzureCliInstalled() {
 function isChocoInstalled() {
     try {
         $chocoVersion = Invoke-Expression "choco -v" -ErrorAction SilentlyContinue
-        return $chocoVersion -ne $null 
+        return ($chocoVersion -ne $null)
     }
     catch {}
     return $false 
+}
+
+function setupHyperVNetworkSwitch($newVirtualSwitchName) {
+    $existingSwitchFound = Get-VMSwitch -Name $newVirtualSwitchName -ErrorAction SilentlyContinue
+    if (!$existingSwitchFound) {
+        New-VMSwitch -Name $newVirtualSwitchName -NetAdapterName "Ethernet" -AllowManagementOS $true 
+    }
+}
+
+function Test-IsAdmin {
+    $wid = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $prp = new-object System.Security.Principal.WindowsPrincipal($wid)
+    $adm = [System.Security.Principal.WindowsBuiltInRole]::Administrator
+    $isAdmin = $prp.IsInRole($adm)
+    return $isAdmin
 }
